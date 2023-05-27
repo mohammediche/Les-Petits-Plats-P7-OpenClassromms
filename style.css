@@ -1,0 +1,150 @@
+@font-face{
+    font-family: 'Anton';
+    src: url('./public/fonts/Anton/Anton-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Manrope';
+    src: url('./public/fonts/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    padding: 0;
+	margin: 0;
+    font-family: 'Manrope';
+}
+.header{
+    position: relative;
+    background-image: url("./public/images/Recette16.jpg");
+    height: 80vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header::before{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(23deg,rgba(8,8,8,.8901960784313725) 27%,transparent);
+}
+.logo{
+    display: flex;
+    align-items: center;
+    padding: 69px;
+    color: #fff;
+    position: relative;
+    font-family: 'Anton';
+    letter-spacing: 1px;
+}
+.logo img{
+    width: 22px;
+    margin-left: 4.6px;
+}
+.content-header{
+    text-align: center;
+    position: relative;
+}
+.title{
+    font-size: 44px;
+    color: #FFD15B;
+    font-weight: 400;
+    line-height: 66.24px;
+    width: 65%;
+    margin: auto;
+    font-family: 'Anton';
+}
+.search_container{
+    position: relative;
+    width: 70%;
+    margin: 30px auto;
+}
+.search_input{
+    width: 100%;
+    padding: 24px 30px;
+    border: none;
+    border-radius: 11px;
+    font-size: 16px;
+    outline: none;
+}
+.iconSearch_div{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 16px 18px 16px 18px;
+    background-color: #1B1B1B;
+    color: #fff;
+    border-radius: 10px;
+}
+/**** main ***/
+.main_container{
+    margin: 0 102px;
+}
+/********************* cardsRecette *******************/
+.allCardsRecette{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 55px;
+    gap: 48px;
+}
+.cardRecette{
+    position: relative;
+    width: 380px;
+    height: 731px;
+    overflow-y: scroll;
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    border-radius: 21px;
+}
+.image_recette{
+    width: 100%;
+    height: 253px;
+    object-fit: cover;
+}
+.time{
+    position: absolute;
+    margin-top: 20px;
+    right: 7px;
+    padding: 5px 15px;
+    background-color: #FFD15B;
+    border-radius: 14px;
+    font-size: 14px;
+}
+.content_recette{
+    padding: 32px 25px 29px 25px;
+}
+.name_recette{
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Anton';
+}
+.recette_description_div{
+    padding: 29px 0;
+}
+.subtitle{
+    color: #7A7A7A;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+.description_recette{
+    font-size: 14px;
+    padding-top: 15px;
+}
+.ingredients_details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding-top: 15px;
+    font-size: 14px;
+}
+.ingredient-measurement{
+    color: #7A7A7A;
+    font-size: 14px;
+}
+/****************************/
