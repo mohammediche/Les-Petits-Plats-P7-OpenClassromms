@@ -1,6 +1,5 @@
-function cardRecetteFactory(card) {
-  const { id, appliance, description, image, ingredients, name, servings, time, ustensils } = card;
-
+function cardRecetteFactory(description, image, ingredients, name, time) {
+  /******************** Travaille en BANCHE PAR fonctionnalitée avant de  PUSH **************/
   const BASE_URL_IMAGE = "./public/images/";
 
   function getCardRecetteDOM() {

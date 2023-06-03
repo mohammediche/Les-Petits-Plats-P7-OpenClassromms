@@ -8,15 +8,53 @@ const getCardRecetteData = async () => {
   }
 };
 const displayCardRecetteData = (allDataCardsRecette) => {
+  console.log("allDataCardsRecette==>", allDataCardsRecette);
   const allCardsRecette = document.querySelector(".allCardsRecette");
+  const allDropdowns = document.querySelector(".all-dropdowns");
+
+  const setDataIngredients = new Set();
+  const setDataUstensils = new Set();
+  const setDataAppliance = new Set();
+
   allDataCardsRecette.forEach((dataCardRecette) => {
-    const cardRecette = cardRecetteFactory(dataCardRecette);
+    const { id, appliance, description, image, ingredients, name, servings, time, ustensils } = dataCardRecette;
+    const cardRecette = cardRecetteFactory(description, image, ingredients, name, time);
     // Récupération du template de la carte de recette en appelant "getCardRecetteDOM()"
     const templateCardRecette = cardRecette.getCardRecetteDOM();
-    console.log("dataCardRecette", dataCardRecette);
     // Affichage des données dans la balise html <article> qui a la class "cardsRecette"
     allCardsRecette.appendChild(templateCardRecette);
+    // ce code permet de stocker dans setData, tout les noms d'ingrédients avec la vérifications pour ne pas avoir de doublant / des ingrédients déja existants dans setDataIngredients
+    dataCardRecette.ingredients.flatMap((ingredient) => setDataIngredients.add(ingredient.ingredient));
+    // ustensils
+    dataCardRecette.ustensils.flatMap((ustensil) => setDataUstensils.add(ustensil));
+    // appliance
+    setDataAppliance.add(dataCardRecette.appliance);
   });
+
+  const dropDownModel = dropDownFactorie([...setDataIngredients], [...setDataUstensils], [...setDataAppliance]);
+  const templateIngredients = dropDownModel.getIngredientsDom();
+  const templateUstensils = dropDownModel.getUstensilsDom();
+  const templateAppliance = dropDownModel.getApplianceDom();
+  // affichage des templates dropdDowns dans la section all-dropdowns
+  allDropdowns.appendChild(templateIngredients);
+  allDropdowns.appendChild(templateUstensils);
+  allDropdowns.appendChild(templateAppliance);
+  // appreilsFactorie([...setDataUstensils]);
+  // Appel de la fonction pour exécuter handleDropDown.js après avoir terminé l'affichage des données
+  runHandleDropDown();
+};
+const runHandleDropDown = () => {
+  // Vérifiez ici que cardRecette.js a terminé son exécution et que les éléments requis sont disponibles
+  if (
+    document.querySelectorAll(".dropdown-container").length > 0 &&
+    document.querySelectorAll(".dropdown-menu").length > 0
+  ) {
+    // Appel du fichier handleDropDown.js
+    handleDropDown();
+  } else {
+    // Attendre un court instant et réessayer
+    setTimeout(runHandleDropDown, 100);
+  }
 };
 
 // Initialisation de l'application
