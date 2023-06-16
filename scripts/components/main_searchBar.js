@@ -13,7 +13,6 @@ const main_searchBarFunc = (allDataCardsRecette) => {
             return value.toString().toLowerCase().includes(valueSearch.toLowerCase());
           }
           if (keys === "ingredients" && Array.isArray(value)) {
-            console.log("ok c'est rentré dans ingredients");
             return value.some((ingredient) => {
               return ingredient.ingredient.toString().toLowerCase().includes(valueSearch.toLowerCase());
             });
@@ -21,7 +20,6 @@ const main_searchBarFunc = (allDataCardsRecette) => {
         });
         // return Object.values(item).some((value) => value.toString().toLowerCase().includes(valueSearch.toLowerCase()));
       });
-      console.log("filteredBySearch=====>", filteredBySearch);
       displayCardRecetteData(filteredBySearch);
     } else if (valuePrevLS && valuePrevLS.trim().length >= 3) {
       displayCardRecetteData(allDataCardsRecette);
