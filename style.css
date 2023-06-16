@@ -66,10 +66,12 @@ body{
 .search_input{
     width: 100%;
     padding: 24px 30px;
+    padding-right: 80px;
     border: none;
     border-radius: 11px;
     font-size: 16px;
     outline: none;
+    color: #7A7A7A;
 }
 .iconSearch_div{
     position: absolute;
@@ -235,9 +237,31 @@ body{
     border-color: #fff;
     box-shadow: 1px 1px 4px -2px rgba(0, 0, 0, 0.4);
 }
-.dropdown-open .dropdown-menu.dropdown-active {
+.dropdown-menu.dropdown-active {
     display: block;
 }
-.dropdown-open .dropdown-toggle::after {
+.dropdown-toggle.dropdown-open::after {
     transform: rotate(180deg);
+}
+/**************** search bar des dropDowns ***********************/
+.searchBar_categorie{
+    position: relative;
+    width: 80%;
+    margin: auto;
+    margin-top: 8px;
+}
+.search_input_categorie{
+    width: 100%;
+    padding: 8px;
+    padding-right: 26px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #7A7A7A;
+    outline:none;
+}
+.iconSearchBar_categorie{
+    position: absolute;
+    right: 8px;
+    top: 7px;
+    color: #7A7A7A;
 }

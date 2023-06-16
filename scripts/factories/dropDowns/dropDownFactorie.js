@@ -6,6 +6,12 @@ const dropDownFactorie = (ingredients, ustensils, appliance) => {
     let template = `
     <div class="dropdown-toggle">Ingrédients</div>
     <div class="dropdown-menu">
+      <div class="searchBar_categorie">
+       <input class="search_input_categorie" type="search" />
+        <div class="iconSearchBar_categorie">
+            <i class="fas fa-search"></i>
+        </div>
+      </div>
       <ul>
         ${ingredients
           .map((name) => {
@@ -25,6 +31,12 @@ const dropDownFactorie = (ingredients, ustensils, appliance) => {
     let template = `
     <div class="dropdown-toggle">Ustensils</div>
     <div class="dropdown-menu">
+      <div class="searchBar_categorie">
+        <input class="search_input_categorie" type="search" />
+        <div class="iconSearchBar_categorie">
+            <i class="fas fa-search"></i>
+        </div>
+      </div>
       <ul>
         ${ustensils
           .map((name) => {
@@ -44,6 +56,12 @@ const dropDownFactorie = (ingredients, ustensils, appliance) => {
     let template = `
     <div class="dropdown-toggle">Appliance</div>
     <div class="dropdown-menu">
+      <div class="searchBar_categorie">
+        <input class="search_input_categorie" type="search" />
+        <div class="iconSearchBar_categorie">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
       <ul>
         ${appliance
           .map((name) => {
