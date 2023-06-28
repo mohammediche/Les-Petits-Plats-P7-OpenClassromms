@@ -20,9 +20,9 @@ const main_searchBarFunc = (allDataCardsRecette) => {
         });
         // return Object.values(item).some((value) => value.toString().toLowerCase().includes(valueSearch.toLowerCase()));
       });
-      displayCardRecetteData(filteredBySearch);
+      displayCardRecetteData(filteredBySearch, "search");
     } else if (valuePrevLS && valuePrevLS.trim().length >= 3) {
-      displayCardRecetteData(allDataCardsRecette);
+      displayCardRecetteData(allDataCardsRecette, "search");
     }
   });
 };

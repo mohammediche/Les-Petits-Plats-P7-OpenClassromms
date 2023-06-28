@@ -1,26 +1,15 @@
-function handleDropDown() {
-  const dropdownMenuContainer = document.querySelectorAll(".dropdown-menu");
-  //
-  const dropdownToggle = document.querySelectorAll(".dropdown-toggle");
+const handleDropDown = (idDropDownList) => {
+  const dropdown = document.querySelector(`#container_${idDropDownList}`);
+  const dropdownMenu = document.querySelector(`#container_${idDropDownList} + .dropdown-menu`);
 
-  for (let i = 0; i < dropdownToggle.length; i++) {
-    const dropdown = dropdownToggle[i];
-    const dropdownMenu = dropdownMenuContainer[i];
-    // console.log("dropdown", dropdown);
-    // console.log("dropdownMenu...", dropdownMenu);
-    // onclick open / close dropDown
-    dropdown.addEventListener("click", (e) => {
-      console.log("clicked !");
-      if (dropdown.classList.contains("dropdown-open")) {
-        dropdown.classList.remove("dropdown-open");
-        dropdownMenu.classList.remove("dropdown-active");
-      } else {
-        dropdown.classList.add("dropdown-open");
-        dropdownMenu.classList.add("dropdown-active");
-      }
-    });
+  if (dropdown.classList.contains("dropdown-open")) {
+    dropdown.classList.remove("dropdown-open");
+    dropdownMenu.classList.remove("dropdown-active");
+  } else {
+    dropdown.classList.add("dropdown-open");
+    dropdownMenu.classList.add("dropdown-active");
   }
-}
+};
 
 window.addEventListener("click", function (e) {
   // Close the menu if click happen outside menu

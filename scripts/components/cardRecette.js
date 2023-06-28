@@ -7,7 +7,7 @@ const getCardRecetteData = async () => {
     console.log("error to get cards recette=>", error);
   }
 };
-const displayCardRecetteData = (allDataCardsRecette) => {
+const displayCardRecetteData = (allDataCardsRecette, status = "init") => {
   const allCardsRecette = document.querySelector(".allCardsRecette");
 
   // Supprimer les éléments existants
@@ -22,50 +22,9 @@ const displayCardRecetteData = (allDataCardsRecette) => {
     allCardsRecette.appendChild(templateCardRecette);
   });
 
-  // Appel de la fonction pour exécuter handleDropDown.js après avoir terminé l'affichage des données
-  runHandleDropDown();
-  // Appelle displayDropDownData avec le nouveau tableau filtré
-  displayDropDownData(allDataCardsRecette);
-};
-const runHandleDropDown = () => {
-  // Vérifiez ici que cardRecette.js a terminé son exécution et que les éléments requis sont disponibles
-  if (
-    document.querySelectorAll(".dropdown-container").length > 0 &&
-    document.querySelectorAll(".dropdown-menu").length > 0
-  ) {
-    // Appel du fichier handleDropDown.js
-    handleDropDown();
-  } else {
-    // Attendre un court instant et réessayer
-    setTimeout(runHandleDropDown, 100);
+  if (status === "search") {
+    updateFilteredDropDownData(allDataCardsRecette);
   }
-};
-
-const displayDropDownData = (allData) => {
-  const allDropdowns = document.querySelector(".all-dropdowns");
-  const setDataIngredients = new Set();
-  const setDataUstensils = new Set();
-  const setDataAppliance = new Set();
-
-  allData.forEach((data) => {
-    // ce code permet de stocker dans setData, tout les noms d'ingrédients avec la vérifications pour ne pas avoir de doublant / des ingrédients déja existants dans setDataIngredients
-    data.ingredients.flatMap((ingredient) => setDataIngredients.add(ingredient.ingredient));
-    // ustensils
-    data.ustensils.flatMap((ustensil) => setDataUstensils.add(ustensil));
-    // appliance
-    setDataAppliance.add(data.appliance);
-  });
-
-  const dropDownModel = dropDownFactorie([...setDataIngredients], [...setDataUstensils], [...setDataAppliance]);
-  const templateIngredients = dropDownModel.getIngredientsDom();
-  const templateUstensils = dropDownModel.getUstensilsDom();
-  const templateAppliance = dropDownModel.getApplianceDom();
-  // affichage des templates dropdDowns dans la section all-dropdowns
-  allDropdowns.innerHTML = "";
-  allDropdowns.appendChild(templateIngredients);
-  allDropdowns.appendChild(templateUstensils);
-  allDropdowns.appendChild(templateAppliance);
-  // appreilsFactorie([...setDataUstensils]);
 };
 
 // Initialisation de l'application
