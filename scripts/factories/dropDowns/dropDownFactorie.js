@@ -1,6 +1,5 @@
 const dropDownFactorie = () => {
   const getDropDownsDom = (data, dropDownName, id) => {
-    console.log("id getDropDownsDom", id);
     const dropDownDiv = document.createElement("div");
     dropDownDiv.classList.add("dropdown-container");
 
@@ -21,8 +20,6 @@ const dropDownFactorie = () => {
   };
 
   const displayDataList = (data, idUl) => {
-    // (idUl, data)
-    //<ul id=${idUl} >
     return `
         <ul id=${idUl}>
         ${data
