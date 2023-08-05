@@ -7,7 +7,7 @@ const dropDownFactorie = () => {
       <div class="dropdown-toggle" id="container_${id}" onclick="handleDropDown('${id}')">${dropDownName}</div>
       <div class="dropdown-menu">
         <div class="searchBar_categorie">
-          <input class="search_input_categorie" type="search" />
+          <input class="search_input_categorie" type="search" id="searchInput_${id}"/>
           <div class="iconSearchBar_categorie">
             <i class="fas fa-search"></i>
           </div>

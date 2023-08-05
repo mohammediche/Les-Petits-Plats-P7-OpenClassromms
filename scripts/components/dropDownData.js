@@ -35,7 +35,6 @@ const displayDropDownData = (allData) => {
   const { setDataIngredients, setDataUstensils, setDataAppliance } = updateUlList(allData);
 
   const dropDownModel = dropDownFactorie();
-  // faire les noms des categories, en tout minuscule et sans accesent, et les passer en 3eme param pour pouvoir la passer ensuite en tant qu'id à la fonction displayDataList
   const idIngredientsList = enleverMajusculesAccents("Ingrédients");
   const idUstensilsList = enleverMajusculesAccents("Ustensils");
   const idApplianceList = enleverMajusculesAccents("Appliance");
@@ -52,6 +51,7 @@ const displayDropDownData = (allData) => {
 };
 
 const updateDataList = (idUl, dataLi) => {
+  // console.log("dataLi", dataLi);
   const myListDropDown = document.querySelector(`#${idUl}`);
   myListDropDown.innerHTML = "";
   for (let index = 0; index < dataLi.length; index++) {
