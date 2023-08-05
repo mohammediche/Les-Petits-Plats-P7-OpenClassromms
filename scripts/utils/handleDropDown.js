@@ -9,6 +9,7 @@ const handleDropDown = (idDropDownList) => {
     dropdown.classList.add("dropdown-open");
     dropdownMenu.classList.add("dropdown-active");
   }
+  handleSearchDropDown(idDropDownList);
 };
 
 window.addEventListener("click", function (e) {
