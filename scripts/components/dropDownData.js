@@ -20,14 +20,14 @@ const updateFilteredDropDownData = (filteredData) => {
   updateDataList("appliance", [...setDataAppliance]);
 };
 
-function enleverMajusculesAccents(id) {
+function enleverMajusculesAccents(text) {
   // Supprimer les accents
-  const idSansAccents = id.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const textSansAccents = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   // Convertir en minuscules
-  const idEnMinuscules = idSansAccents.toLowerCase();
+  const textEnMinuscules = textSansAccents.toLowerCase();
 
-  return idEnMinuscules;
+  return textEnMinuscules;
 }
 
 const displayDropDownData = (allData) => {
@@ -51,12 +51,59 @@ const displayDropDownData = (allData) => {
 };
 
 const updateDataList = (idUl, dataLi) => {
-  // console.log("dataLi", dataLi);
   const myListDropDown = document.querySelector(`#${idUl}`);
   myListDropDown.innerHTML = "";
   for (let index = 0; index < dataLi.length; index++) {
     const li = document.createElement("li");
     li.textContent = dataLi[index];
     myListDropDown.appendChild(li);
+  }
+};
+// trier ma data recettes au clique sur les élements du dropDown des catégories
+const sortRecipesByCategory = (allDataCardsRecette) => {
+  // const listItems = Array.from(myList.getElementsByTagName("li"));
+  const listItems = document.querySelectorAll(".dropdown-menu li");
+  // click
+  listItems.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      const idListUl = e.target.parentNode.id;
+      const itemTarget = e.target.textContent;
+      // ceci est pour le cas de appliance
+      const newDataRecipes = allDataCardsRecette.filter((recipe) => {
+        // if id === appliance
+        if (idListUl === "ingredients") {
+          return recipe.ingredients.some((ingredient) => ingredient.ingredient === itemTarget);
+        } else if (idListUl === "ustensils") {
+          return recipe.ustensils.some((ustensil) => ustensil === itemTarget);
+        } else if (idListUl === "appliance") {
+          return recipe.appliance === itemTarget;
+        } else {
+          console.log("else");
+          return;
+        }
+      });
+      // on met à jour la listes des recettes avec le nouveau tableau
+      displayCardRecetteData(newDataRecipes);
+      // on met à jour nos listes ul des dropDowns
+      updateFilteredDropDownData(newDataRecipes);
+
+      // on stocke les élements cliqué dans LocalStorage
+      let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTags")) || [];
+      selectedTagsLS.push(item.textContent);
+      localStorage.setItem("selectedTags", JSON.stringify(selectedTagsLS));
+      // on rappelle la fonction actuel en elle-meme, pour pouvoir accéder au clique aux nouvelles données du dropDown génére par updateFilteredDropDownData
+      sortRecipesByCategory(newDataRecipes);
+      getTags();
+    });
+
+    handleselectedTagsLS(item);
+  });
+};
+
+const handleselectedTagsLS = (item) => {
+  let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTags")) || [];
+
+  if (selectedTagsLS.includes(item.textContent)) {
+    item.style.backgroundColor = "#FFD15B";
   }
 };

@@ -24,6 +24,7 @@ const displayCardRecetteData = (allDataCardsRecette, status = "init") => {
 
   if (status === "search") {
     updateFilteredDropDownData(allDataCardsRecette);
+    sortRecipesByCategory(allDataCardsRecette);
   }
 };
 
@@ -33,5 +34,6 @@ const init = async () => {
   displayCardRecetteData(allDataCardsRecette);
   displayDropDownData(allDataCardsRecette);
   main_searchBarFunc(allDataCardsRecette);
+  sortRecipesByCategory(allDataCardsRecette);
 };
 init();
