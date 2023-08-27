@@ -151,13 +151,14 @@ body{
 /****************************/
 
 /* Dropdown menu css */
-.all-dropdowns{
+.all-dropdowns,
+.all-tags{
     display: flex;
     justify-content: flex-start;
 }
 .dropdown-container {
     position: relative;
-    margin: 25px 66px 55px 0;
+    margin: 25px 66px 21px 0;
 }
 .dropdown-container .dropdown-toggle {
     width: 195px;
@@ -264,4 +265,29 @@ body{
     right: 8px;
     top: 7px;
     color: #7A7A7A;
+}
+/*** tags ***/
+.all-tags > *{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 18px;
+    border-radius: 10px;
+    background-color: #FFD15B;
+    margin-right: 20px;
+    margin-bottom: 43px;
+}
+.remove-tag-button{
+    background: transparent;
+    border: none;
+    border-radius: 100%;
+    font-size: 20px;
+    padding: 2px 5px;
+    cursor: pointer;
+    transition: 150ms;
+}
+.remove-tag-button:hover{
+    background-color: #000;
+    color: #FFD15B;
 }

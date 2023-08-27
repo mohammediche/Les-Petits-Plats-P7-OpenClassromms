@@ -24,7 +24,9 @@ const displayCardRecetteData = (allDataCardsRecette, status = "init") => {
 
   if (status === "search") {
     updateFilteredDropDownData(allDataCardsRecette);
+    sortRecipesByCategory(allDataCardsRecette);
   }
+  // console.log("allDataCardsRecette", allDataCardsRecette);
 };
 
 // Initialisation de l'application
@@ -33,5 +35,7 @@ const init = async () => {
   displayCardRecetteData(allDataCardsRecette);
   displayDropDownData(allDataCardsRecette);
   main_searchBarFunc(allDataCardsRecette);
+  sortRecipesByCategory(allDataCardsRecette);
+  initFilterRecipes_ByLocalStorageTags(allDataCardsRecette);
 };
 init();
