@@ -52,11 +52,21 @@ const displayDropDownData = (allData) => {
 
 const updateDataList = (idUl, dataLi) => {
   const myListDropDown = document.querySelector(`#${idUl}`);
+  let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTagsLS")) || [];
+
   myListDropDown.innerHTML = "";
   for (let index = 0; index < dataLi.length; index++) {
     const li = document.createElement("li");
     li.textContent = dataLi[index];
     myListDropDown.appendChild(li);
+    // mettre un backgroundColor orange pour les élements sélectionnés
+    selectedTagsLS.forEach((val) => {
+      const keys = Object.keys(val)[0];
+      const items = val[keys];
+      if (items.includes(li.textContent)) {
+        li.style.backgroundColor = "#FFD15B";
+      }
+    });
   }
 };
 // trier ma data recettes au clique sur les élements du dropDown des catégories
@@ -68,7 +78,6 @@ const sortRecipesByCategory = (allDataCardsRecette) => {
     item.addEventListener("click", (e) => {
       const idListUl = e.target.parentNode.id;
       const itemTarget = e.target.textContent;
-      // ceci est pour le cas de appliance
       const newDataRecipes = allDataCardsRecette.filter((recipe) => {
         // if id === appliance
         if (idListUl === "ingredients") {
@@ -84,26 +93,62 @@ const sortRecipesByCategory = (allDataCardsRecette) => {
       });
       // on met à jour la listes des recettes avec le nouveau tableau
       displayCardRecetteData(newDataRecipes);
+
+      let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTagsLS")) || [];
+      // Recherche de l'index correspondant à idListUl dans le tableau
+      const index = selectedTagsLS.findIndex((item) => item.hasOwnProperty(idListUl));
+
+      if (index !== -1) {
+        // Si idListUl existe déjà dans le tableau, ajoute l'élément à son tableau d'éléments
+        selectedTagsLS[index][idListUl].push(item.textContent);
+      } else {
+        // Sinon, crée un nouvel objet avec idListUl comme propriété et l'élément cliqué dans un tableau
+        const newObj = { [idListUl]: [item.textContent] };
+        selectedTagsLS.push(newObj);
+      }
+      localStorage.setItem("selectedTagsLS", JSON.stringify(selectedTagsLS));
       // on met à jour nos listes ul des dropDowns
       updateFilteredDropDownData(newDataRecipes);
 
-      // on stocke les élements cliqué dans LocalStorage
-      let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTags")) || [];
-      selectedTagsLS.push(item.textContent);
-      localStorage.setItem("selectedTags", JSON.stringify(selectedTagsLS));
       // on rappelle la fonction actuel en elle-meme, pour pouvoir accéder au clique aux nouvelles données du dropDown génére par updateFilteredDropDownData
       sortRecipesByCategory(newDataRecipes);
+      // afficher les tags
       getTags();
     });
-
-    handleselectedTagsLS(item);
   });
 };
 
-const handleselectedTagsLS = (item) => {
-  let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTags")) || [];
+// Suppression des tags :
+/* Supprimer les tags du LS, et rappeler la fonction F1 pour refiltrer les recettes selon les tags actifs */
 
-  if (selectedTagsLS.includes(item.textContent)) {
-    item.style.backgroundColor = "#FFD15B";
-  }
+const initFilterRecipes_ByLocalStorageTags = (allDataCardsRecette) => {
+  // Filtrer les données de recettes en fonction des éléments stockés dans le LocalStorage
+  let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTagsLS")) || [];
+  // Créer un tableau pour stocker les recettes correspondantes à tous les éléments du LocalStorage
+  let newDataRecipes = allDataCardsRecette;
+
+  selectedTagsLS.forEach((val) => {
+    const keys = Object.keys(val)[0];
+    const items = val[keys];
+
+    newDataRecipes = newDataRecipes.filter((recipe) => {
+      if (keys === "ingredients") {
+        return items.every((item) => recipe.ingredients.some((ingredient) => ingredient.ingredient === item));
+      } else if (keys === "ustensils") {
+        return items.every((item) => recipe.ustensils.includes(item));
+      } else if (keys === "appliance") {
+        return items.includes(recipe.appliance);
+      }
+      return true;
+    });
+  });
+  // Mettre à jour la liste des recettes avec le nouveau tableau
+  displayCardRecetteData(newDataRecipes);
+
+  // Mettre à jour les listes ul des dropDowns
+  updateFilteredDropDownData(newDataRecipes);
+
+  sortRecipesByCategory(newDataRecipes);
+  // Afficher les tags
+  getTags();
 };
