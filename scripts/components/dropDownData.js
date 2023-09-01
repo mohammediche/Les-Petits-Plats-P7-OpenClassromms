@@ -78,6 +78,16 @@ const sortRecipesByCategory = (allDataCardsRecette) => {
     item.addEventListener("click", (e) => {
       const idListUl = e.target.parentNode.id;
       const itemTarget = e.target.textContent;
+      let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTagsLS")) || [];
+      // Vérifier si l'élément cliqué est déjà présent dans selectedTagsLS
+      const isItemAlreadySelected = selectedTagsLS.some(
+        (selectedItem) => selectedItem.hasOwnProperty(idListUl) && selectedItem[idListUl].includes(itemTarget)
+      );
+      // Si l'élément est déjà sélectionné, retournez sans rien faire
+      if (isItemAlreadySelected) {
+        return;
+      }
+
       const newDataRecipes = allDataCardsRecette.filter((recipe) => {
         // if id === appliance
         if (idListUl === "ingredients") {
@@ -94,7 +104,6 @@ const sortRecipesByCategory = (allDataCardsRecette) => {
       // on met à jour la listes des recettes avec le nouveau tableau
       displayCardRecetteData(newDataRecipes);
 
-      let selectedTagsLS = JSON.parse(localStorage.getItem("selectedTagsLS")) || [];
       // Recherche de l'index correspondant à idListUl dans le tableau
       const index = selectedTagsLS.findIndex((item) => item.hasOwnProperty(idListUl));
 
