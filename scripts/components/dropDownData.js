@@ -115,7 +115,6 @@ const sortRecipesByCategory = (allDataCardsRecette) => {
         const newObj = { [idListUl]: [item.textContent] };
         selectedTagsLS.push(newObj);
       }
-
       localStorage.setItem("selectedTagsLS", JSON.stringify(selectedTagsLS));
       // on met à jour nos listes ul des dropDowns
       updateFilteredDropDownData(newDataRecipes);
