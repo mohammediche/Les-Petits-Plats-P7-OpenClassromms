@@ -75,12 +75,14 @@ body{
 }
 .iconSearch_div{
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 6px;
+    right: 6px;
     padding: 16px 18px 16px 18px;
     background-color: #1B1B1B;
     color: #fff;
     border-radius: 10px;
+    min-width: 51px;
+    min-height: 52px;
 }
 /**** main ***/
 .main_container{
@@ -93,6 +95,14 @@ body{
     align-items: center;
     flex-wrap: wrap;
     gap: 48px;
+    margin-top: 43px;
+}
+.total_recipes{
+    position: absolute;
+    right: 175px;
+    top: 740px;
+    font-family: 'Anton';
+    font-size: 21px;
 }
 .cardRecette{
     position: relative;
@@ -276,7 +286,6 @@ body{
     border-radius: 10px;
     background-color: #FFD15B;
     margin-right: 20px;
-    margin-bottom: 43px;
 }
 .remove-tag-button{
     background: transparent;
