@@ -1,7 +1,6 @@
 function cardRecetteFactory(description, image, ingredients, name, time) {
   /******************** Travaille en BANCHE PAR fonctionnalitée avant de  PUSH **************/
   const BASE_URL_IMAGE = "./public/images/";
-
   function getCardRecetteDOM() {
     const section = document.createElement("section");
     section.className = "cardRecette";

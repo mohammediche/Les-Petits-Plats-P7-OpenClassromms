@@ -20,6 +20,10 @@ const main_searchBarFunc = (allDataCardsRecette) => {
         });
         // return Object.values(item).some((value) => value.toString().toLowerCase().includes(valueSearch.toLowerCase()));
       });
+      // On supprime nos tags au saisi de la main search bar
+      localStorage.removeItem("selectedTagsLS");
+      initFilterRecipes_ByLocalStorageTags(filteredBySearch);
+      /**/
       displayCardRecetteData(filteredBySearch, "search");
     } else if (valuePrevLS && valuePrevLS.trim().length >= 3) {
       displayCardRecetteData(allDataCardsRecette, "search");

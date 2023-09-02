@@ -1,32 +1,3 @@
-// const getTags = () => {
-//   const allTags = document.querySelector(".all-tags");
-//   const tagsArray = JSON.parse(localStorage.getItem("selectedTagsLS"));
-
-//   let template = tagsArray
-//     ? tagsArray
-//         .map((tagObject) => {
-//           const idListUl = Object.keys(tagObject)[0]; // La clé idListUl
-//           const tagItems = tagObject[idListUl]; // Les éléments correspondants
-
-//           const tagHtml = tagItems
-//             .map((tag) => {
-//               return `
-//               <div>
-//                 <span>${tag}</span>
-//                 <button class="remove-tag-button"><i class="fas fa-times"></i></button>
-//               </div>`;
-//             })
-//             .join("");
-
-//           return tagHtml;
-//         })
-//         .join("")
-//     : "";
-
-//   allTags.innerHTML = template;
-// };
-
-// getTags();
 const getTags = () => {
   const allTags = document.querySelector(".all-tags");
   const tagsArray = JSON.parse(localStorage.getItem("selectedTagsLS"));
